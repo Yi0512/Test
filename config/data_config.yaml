@@ -1,0 +1,29 @@
+# =====================================
+# 数据集配置文件
+# =====================================
+
+# 数据集基本信息
+dataset_name: "coco_simple"
+num_classes: 2              # 类别数
+class_names:                # 类别名称
+  - "person"
+  - "car"
+
+# 输入配置
+image_size: 416             # 输入图像大小
+
+# 数据路径
+train_image_dir: "data/train/images"
+train_label_dir: "data/train/labels"
+val_image_dir: "data/val/images"
+val_label_dir: "data/val/labels"
+test_image_dir: "data/test/images"
+test_label_dir: "data/test/labels"
+
+# 标签格式
+label_format: "yolo"        # YOLO 格式: class_id x_center y_center width height (归一化)
+
+# 数据统计
+train_samples: 1000
+val_samples: 200
+test_samples: 100

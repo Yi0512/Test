@@ -1,0 +1,26 @@
+# PaddlePaddle 深度学习框架
+paddlepaddle>=3.0.0
+paddlehub>=3.0.0
+
+# 计算机视觉
+opencv-python>=4.8.0
+
+# 数据处理
+numpy>=1.24.0
+pandas>=1.5.0
+
+# 配置管理
+pyyaml>=6.0
+
+# 进度条
+tqdm>=4.66.0
+
+# 数据可视化
+matplotlib>=3.7.0
+
+# Jupyter notebook 支持
+jupyter>=1.0.0
+ipython>=8.0.0
+
+# 日志记录
+loguru>=0.7.0
