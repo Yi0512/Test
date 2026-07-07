@@ -2,7 +2,7 @@
 模型训练脚本
 
 使用方法:
-    python src/train.py --use-test-data
+    python src/train.py
     python src/train.py --config config/train_config.yaml
     python src/train.py --epochs 100 --batch-size 32
 """
@@ -51,7 +51,6 @@ def save_model(model, save_path):
 
 
 def train_one_epoch(model, train_loader, loss_fn, optimizer, epoch, config):
-     # 第 1 步：让模型进入训练模式
     model.train()
     total_loss = 0.0
     num_batches = 0
@@ -60,9 +59,8 @@ def train_one_epoch(model, train_loader, loss_fn, optimizer, epoch, config):
                        total=len(train_loader),
                        desc=f"Epoch {epoch+1}/{config['epochs']}")
     
-      # 第 2 步：循环加载数据
     for batch_id, (images, targets) in progress_bar:
-        # 第3步：前向传播(模型思考)
+        # 前向传播
         outputs = model(images)
         
         # ===== 形状对齐 =====
@@ -80,17 +78,15 @@ def train_one_epoch(model, train_loader, loss_fn, optimizer, epoch, config):
                 )
         # ===== 结束形状对齐 =====
         
-        # 第4步：计算损失（模型的错误程度）
+        # 计算损失
         loss = nn.functional.mse_loss(outputs, targets)
         
-        # 第5步：反向传播（计算改进方向，分析为什么错了）
+        # 反向传播
         loss.backward()
         optimizer.step()
         optimizer.clear_grad()
         
-
-
-        # 记录损失（对照答案，看错了多少）
+        # 记录损失
         total_loss += loss.item()
         num_batches += 1
         
@@ -100,10 +96,6 @@ def train_one_epoch(model, train_loader, loss_fn, optimizer, epoch, config):
             'avg_loss': f'{total_loss/num_batches:.4f}'
         })
         
-        # 第 6 步：更新权重（模型学习改进）
-        # optimizer.step()
-        # optimizer.clear_grad()
-
         # 定期打印日志
         if (batch_id + 1) % config.get('log_interval', 10) == 0:
             print(f"  Batch {batch_id+1}, Loss: {loss.item():.4f}")

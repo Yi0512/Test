@@ -2,8 +2,8 @@
 模型推理脚本
 
 使用方法:
-    python inference.py --image test.jpg --weights model.pdparams
-    python inference.py --video test.mp4 --weights model.pdparams
+    python src/inference.py --image ./data/val/images/test.jpg --weights ./output/models/yolo_best.pdparams
+    python src/inference.py --video test.mp4 --weights ./output/models/yolo_best.pdparams
 """
 
 import os
